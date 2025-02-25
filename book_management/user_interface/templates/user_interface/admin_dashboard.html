@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management Store</title>
+    {% load static %}
+
+    <!-- Google Font: Bebas Neue -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Bebas Neue', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: auto; /* ✅ Allows vertical scrolling */
+    position: relative;
+}
+
+
+        /* Background Image */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: url("{% static 'images/Library-Management-System.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Overlay with Reduced Opacity */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Adjust opacity here */
+            z-index: -1;
+        }
+
+        /* Header Section */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #4a90e2;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .intro {
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #ddd;
+        }
+
+        /* Rotating Quotes Section */
+        .quotes-container {
+            margin: 2rem 0;
+            padding: 1rem 2rem;
+            border-left: 4px solid #4a90e2;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .author {
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+
+        /* Navigation Button */
+        .home-btn {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            color: white;
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .home-btn:hover {
+            background-color: #357ab8;
+            transform: translateY(-3px);
+        }
+
+        /* Project Details and Future Enhancements */
+        .project-details, .future-enhancements {
+            margin-top: 4rem;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 2rem;
+            color: #ddd;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="overlay"></div>
+
+    <header>
+        <h1>📚 Book Management Store</h1>
+    </header>
+
+    <main>
+        <div class="intro">
+            <p>Discover, manage, and download a world of knowledge with ease!</p>
+        </div>
+
+        <div class="quotes-container">
+            <p class="quote" id="quoteText"></p>
+            <p class="author" id="quoteAuthor"></p>
+        </div>
+
+        <a href="{% url 'book_list' %}" class="home-btn">Go to Book List Page</a>
+
+        <!-- Project Details Section -->
+        <div class="project-details">
+            <h2>📂 Project Details</h2>
+            <ul>
+                <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+                <li><strong>Backend:</strong> Django Framework</li>
+                <li><strong>Features:</strong>
+                    <ul>
+                        <li>Admin panel for book management</li>
+                        <li>Search bar to filter books by typing</li>
+                        <li>Book download in PDF format</li>
+                        <li>Scrollable and informative admin dashboard</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Future Enhancements Section -->
+        <div class="future-enhancements">
+            <h2>🚀 Future Enhancements</h2>
+            <ul>
+                <li><strong>User Authentication:</strong> Login, signup, and role-based access control</li>
+                <li><strong>User Profiles:</strong> Personalized book recommendations</li>
+                <li><strong>Rating & Reviews:</strong> Allow users to rate and review books</li>
+                <li><strong>Bookmarks & Reading List:</strong> Save favorite books for later</li>
+                <li><strong>Analytics Dashboard:</strong> For admins to see user interactions and popular books</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Book Management Store. All rights reserved.
+    </footer>
+    <script>
+        const quotes = [
+            { text: "A room without books is like a body without a soul.", author: "Marcus Tullius Cicero" },
+            { text: "So many books, so little time.", author: "Frank Zappa" },
+            { text: "A book is a dream that you hold in your hand.", author: "Neil Gaiman" },
+            { text: "Reading is to the mind what exercise is to the body.", author: "Joseph Addison" },
+            { text: "Books are a uniquely portable magic.", author: "Stephen King" }
+        ];
+
+        function showRandomQuote() {
+            const quoteElement = document.getElementById('quoteText');
+            const authorElement = document.getElementById('quoteAuthor');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+            quoteElement.textContent = `"${randomQuote.text}"`;
+            authorElement.textContent = `- ${randomQuote.author}`;
+        }
+
+        setInterval(showRandomQuote, 6000);
+        window.onload = showRandomQuote;
+    </script>
+</body>
+</body>
+</html>
